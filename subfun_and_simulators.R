@@ -14,7 +14,7 @@ get_lower_tri<-function(cormat){
 }
 # Get upper triangle of the correlation matrix
 get_upper_tri <- function(cormat){
-  cormat[lower.tri(cormat)]<- NA
+  cormat[lower.tri(cormat)] <- NA
   return(cormat)
 }
 
@@ -33,7 +33,7 @@ pq = function(wk, s0){
   exp(-wk^2/s0)/sum(exp(-wk^2/s0))
 }
 
-# remove the diagnal 
+# remove the diagonal 
 RmDiag = function(Matr){
   diag(Matr) = NA
   return(matrix(Matr[is.na(Matr)==0], 
