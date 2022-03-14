@@ -48,8 +48,8 @@ MyBrwfun = function(MyNi, Ri, sig02, s02, wiq, cctrpar = 0.1,
   cplNi = RmDiag(replicate(length(MyNi), MyNi))
   cplsig02 = RmDiag(replicate(length(sig02), sig02))
   tsWiq = RmDiag(wiq)
-  tsPiq = apply(tsWiq, 2, pq, s0 = cctrpar)
-  obj = MyNi*Ri*(1-Ri)/sig02 + 1/colSums(tsPiq^2*(1/(1/s02 + cplNi*Ri*(1-Ri)/cplsig02) + 
+  tsPiq = apply(tsWiq, 1, pq, s0 = cctrpar)
+  obj = MyNi*Ri*(1-Ri)/sig02 + 1/colSums(tsPiq^2*t(1/(1/s02 + cplNi*Ri*(1-Ri)/cplsig02) + 
                                                     tsWiq*dw[2]/(dw[1]-1) + (1-tsWiq)*br[2]/(br[1]-1))) - 
     (qnorm(eta) + qnorm(zeta))^2/targEff^2
   
