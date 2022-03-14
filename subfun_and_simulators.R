@@ -6,6 +6,7 @@ library(RColorBrewer)
 
 library(patchwork)
 
+
 #----------------------------- sub-functions -----------------------------#
 # Get lower triangle of the correlation matrix
 get_lower_tri<-function(cormat){
@@ -18,6 +19,12 @@ get_upper_tri <- function(cormat){
   return(cormat)
 }
 
+
+## Ri is the allocation ratio to the experimental treatment in subtrial i = 1, ..., k
+## sig02 is a vector of the common variances specific to the subtrials 1, ..., k
+## s02 is a vector of the operational prior variances, corresponding to s_{01}^2, ..., s_{0k}^2 in the notation of the paper
+## eta and zeta are the probability thresholds for the success and futility criteria, respectively
+
 #------------------------------- No borrowing ---------------------------------#
 NoBrwfun = function(SS, sig02, Ri, targEff, eta = 0.95, zeta = 0.80, s02 = 100){
   sum(abs(SS*Ri*(1-Ri)/sig02 - (qnorm(eta)+qnorm(zeta))^2/targEff^2 - 1/s02))
@@ -29,8 +36,14 @@ NoBrwNi = function(vari, Ri, eta, zeta, targEff, s02 = 100){
 }
 
 #---------------------- Proposed approach of borrowing ------------------------#
-pq = function(wk, s0){
+## pq(wk, s0) transforms the discrepancy measurements into probability weights
+
+pq = function(wk, s0){      
+  if(length(unique(wk)) == 1){
+    rep(0.5, length(wk))
+  }else{
   exp(-wk^2/s0)/sum(exp(-wk^2/s0))
+  }
 }
 
 # remove the diagonal 
@@ -41,6 +54,13 @@ RmDiag = function(Matr){
   )
 }
 
+
+## wiq is a k-by-k matrix that captures pairwise discrepancy  
+## cctrpar is the concentration parameter (i.e., c_0 in the paper). 
+## Setting cctrpar to a value considerably smaller than smallest discrepancy contained in wiq is recommended.
+## targEff is the effect size deemed as clinically meaningful (i.e., \delta in the paper)
+## dw = c(a1, b1) for down-weighting, i.e., the first component of the Gamma mixture distribution in (2.1) of the paper 
+## br = c(a2, b2) for borrowing, i.e., the second component of the Gamma mixture distribution in (2.1) of the paper)
 
 MyBrwfun = function(MyNi, Ri, sig02, s02, wiq, cctrpar = 0.1, 
                     dw, br, targEff, eta = 0.95, zeta = 0.80){
