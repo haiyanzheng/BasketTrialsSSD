@@ -36,8 +36,8 @@ pq = function(wk, s0){
 # remove the diagonal 
 RmDiag = function(Matr){
   diag(Matr) = NA
-  return(matrix(Matr[is.na(Matr)==0], 
-                nrow = nrow(Matr)-1, ncol = ncol(Matr))
+  return(t(matrix(Matr[is.na(Matr)==0], 
+                nrow = nrow(Matr)-1, ncol = ncol(Matr)))
   )
 }
 
