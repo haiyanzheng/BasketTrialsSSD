@@ -1,9 +1,9 @@
 source("subfun_and_simulators.R")
 
 
-#-------------------------- Fig3: subtrial sample size -------------------------#
+#-------------------------- Fig2: trial operating characteristics -------------------------#
 # Simulation results for Scenario 1
-# For reproducing other plots of Fig3
+# For reproducing results for other plots of Fig2
 # please set SimSc = MySc2, MySc3, MySc4, MySc5, MySc6, respectively, on line 13
 
 nsim = 100000
