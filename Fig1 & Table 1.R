@@ -1,9 +1,9 @@
 source("subfun_and_simulators.R")
 
 
-#-------------------------- Fig3: subtrial sample size -------------------------#
-# Simulation results for Scenario 1
-# For reproducing other plots of Fig3
+#-------------------------- Fig1: simulation scenarios -------------------------#
+# Visualisation of the outcome distributions and pairwise commensurability for Scenario 1
+# For reproducing other plots of Fig1
 # please set SimSc = MySc2, MySc3, MySc4, MySc5, MySc6, respectively, on line 9
 
 SimSc = MySc1
