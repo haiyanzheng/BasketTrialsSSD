@@ -39,11 +39,7 @@ NoBrwNi = function(vari, Ri, eta, zeta, targEff, s02 = 100){
 ## pq(wk, s0) transforms the discrepancy measurements into probability weights
 
 pq = function(wk, s0){      
-  if(length(unique(wk)) == 1){
-    rep(0.5, length(wk))
-  }else{
   exp(-wk^2/s0)/sum(exp(-wk^2/s0))
-  }
 }
 
 # remove the diagonal 
